@@ -1,0 +1,135 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Bad+Script&display=swap");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary: #38b6ff;
+  --secondary: #2b3452;
+  --tertiary: black;
+  --quarterly: #03bcff;
+}
+body {
+  margin: 0;
+  padding: 20px;
+  font-family: "Poppins";
+  background: var(--tertiary);
+}
+* {
+  color: white;
+  margin: 0;
+}
+p {
+  margin: 20px 0;
+}
+button {
+  border: 0;
+  padding: 8px;
+  border-radius: 4px;
+  color: white;
+  background: var(--primary);
+  cursor: pointer;
+}
+
+/* navbar */
+header nav {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  font-size: 20px;
+}
+header nav h1 {
+  margin-right: auto;
+  border-bottom: 3px solid var(--primary);
+}
+header nav a {
+  text-decoration: none;
+  padding: 6px;
+  border-radius: 4px;
+  transition: all 0.3s;
+}
+header nav a.active {
+  background: var(--primary);
+}
+header nav a:hover {
+  background-color: white;
+  color: var(--primary);
+}
+.cards-btn {
+  background-color: var(--quarterly);
+  color: white;
+  transition: all 0.3s;
+}
+.cards-btn:hover {
+  background-color: white;
+  color: var(--quarterly);
+}
+
+/* page content */
+main {
+  max-width: 1200px;
+  margin: 40px auto;
+}
+.statement {
+  font-family: "Bad Script", cursive;
+  transition: all ease 0.3s;
+}
+.about-me,
+.contact-me,
+.project {
+  font-size: 40px;
+}
+/* home */
+span {
+  font-weight: 600;
+}
+
+.underline-white {
+  text-decoration: underline;
+  text-decoration-color: white;
+}
+/* CSS */
+.color-main {
+  background-color: var(--quarterly);
+  transition: all ease 0.3s;
+}
+.color-main:hover {
+  color: var(--quarterly);
+  background-color: white;
+}
+.url:hover {
+  color: var(--quarterly);
+}
+.main-span {
+  color: var(--quarterly);
+}
+.card-image {
+  transition: all ease 0.3s;
+  cursor: pointer;
+}
+.card-image:hover {
+  padding: 10px;
+}
+.me {
+  font-family: "Bad Script", cursive;
+  text-decoration: underline;
+}
+.icon {
+  transition: all ease 0.3s;
+}
+.icon:hover {
+  font-size: 40px;
+  cursor: pointer;
+}
+@media (max-width: 640px) {
+  header nav {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+}
