@@ -106,6 +106,7 @@ span {
 .main-span {
   color: var(--quarterly);
 }
+
 .card-image {
   transition: all ease 0.3s;
   cursor: pointer;
@@ -124,12 +125,44 @@ span {
   font-size: 40px;
   cursor: pointer;
 }
+.position {
+  letter-spacing: 10px;
+}
+
 @media (max-width: 640px) {
   header nav {
     display: flex;
-    gap: 16px;
+    gap: 0;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 0 auto;
+    font-size: 20px;
+  }
+  .card-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .position {
+    letter-spacing: 5px;
+  }
+  .card {
+    max-width: 90%;
+  }
+}
+@media (max-width: 1024px) {
+  header nav {
+    display: flex;
+    gap: 0;
     justify-content: center;
     max-width: 1200px;
     margin: 0 auto;
+    font-size: 20px;
+  }
+  .card-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
 }

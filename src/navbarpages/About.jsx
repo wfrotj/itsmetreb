@@ -7,7 +7,7 @@ function About() {
     <div className="about flex flex-row justify-between items-center gap-4">
       <div className="mobile: text-l text-justify mt-4 flex flex-col justify-center ">
         <h2 className="about-me mobile: text-4xl text-center ">About Me</h2>
-        <div className="text-xl p-10">
+        <div className="text-xl laptop:p-10 mobile:p-2">
           <p>
             As a career shifter, my drive to reach higher levels of expertise
             and excel in the field of software development is constant. I
@@ -27,8 +27,8 @@ function About() {
           </p>
         </div>
         <div>
-          <div className="mobile: flex justify-center items-center ">
-            <h2 className="mobile: text-2xl text-center ">Techinal Skills</h2>
+          <div className="mobile:flex justify-center items-center ">
+            <h2 className="mobile:text-2xl text-center ">Techinal Skills</h2>
           </div>
           <section className="mobile: flex flex-wrap justify-center items-center gap-4 mt-4">
             <button className="rounded-full border-white border-solid border-2  w-32 h-10 text-black bg-customYellow ">
@@ -62,11 +62,9 @@ function About() {
             <h3 className="text-xl">Top 4 Student</h3>
           </div>
         </div>
-        <div className="flex justify-center items-center">
-          {" "}
+        <div className="flex justify-center items-center mobile:mt-4">
           <Link to="/projects">
-            <button className="color-main mobile: w-96 bg-blue-500 text-white font-bold py-2 px-4  text-2xl rounded mt-4 hover:bg-white hover:text-blue-400">
-              {" "}
+            <button className="color-main mobile:w-60 tablet:w-80 laptop:w-96 text-white font-bold py-2 px-4  mobile:text-xl tablet:text-2xl laptop:text-2xl laptop:mt-8">
               Here are my Projects
             </button>
           </Link>
