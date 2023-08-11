@@ -25,7 +25,9 @@ function Projects() {
               destructuring props to render the different variables.
             </Card.Text>
             <Button className="cards-btn">
-              <a href="https://wfrotj.github.io/BreakingNews/">Visit link</a>
+              <a href="https://wfrotj.github.io/BreakingNews/" target="_blank">
+                Visit link
+              </a>
             </Button>
           </Card.Body>
         </Card>
@@ -43,7 +45,7 @@ function Projects() {
               jsonwebtoken for authentication of the user.
             </Card.Text>
             <Button className="cards-btn">
-              <a href="https://phonebook-application-4baq.onrender.com/login">
+              <a href="https://hellovms.onrender.com/" target="_blank">
                 Visit link
               </a>
             </Button>
@@ -62,7 +64,10 @@ function Projects() {
               style in frontend.
             </Card.Text>
             <Button className="cards-btn">
-              <a href="https://phonebook-application-4baq.onrender.com/login">
+              <a
+                href="https://phonebook-application-4baq.onrender.com"
+                target="_blank"
+              >
                 Visit link
               </a>
             </Button>
