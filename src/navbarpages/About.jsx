@@ -57,7 +57,7 @@ function About() {
             <h2>Awards in Bootcamp</h2>
           </div>
           <div className="mobile: text-center mt-4 underline ">
-            <h3 className="text-xl">Best in Capstone</h3>
+            <h3 className="text-xl">Best in Capstone(Backend Developer)</h3>
             <h3 className="text-xl">Best in Coding</h3>
             <h3 className="text-xl">Top 4 Student</h3>
           </div>

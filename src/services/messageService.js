@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const apiClient = axios.create({
-  baseURL: "http://localhost:2020",
+  baseURL: "https://itsmetreb-m0f3.onrender.com",
   headers: {
     common: {
       "Content-Type": "multipart/form-data",
