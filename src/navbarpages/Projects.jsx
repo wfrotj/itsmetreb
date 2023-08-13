@@ -9,7 +9,7 @@ function Projects() {
   return (
     <React.Fragment>
       <h1 className="project mobile:flex mobile:justify-center mobile:items-center mobile:text-center laptop:flex laptop:justify-center items-center text-3xl mb-8">
-        Projects Experience
+        Projects Experiences
       </h1>
       <div className="flex justify-center gap-10 mobile:flex mobile:flex-col laptop:flex-row tablet:flex-row">
         <Card style={{ width: "30rem" }}>
