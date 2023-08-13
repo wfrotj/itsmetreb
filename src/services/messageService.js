@@ -1,16 +1,9 @@
 import axios from "axios";
 
-const apiClient = axios.create({
-  baseURL: "https://itsmetreb-m0f3.onrender.com",
-  headers: {
-    common: {
-      "Content-Type": "multipart/form-data",
-    },
-  },
-});
+const baseUrl = "localhost:2020";
 
 async function createMessage(message) {
-  const response = await apiClient.post("/", message);
+  const response = await axios.post(baseUrl, message);
   return response.data;
 }
 
