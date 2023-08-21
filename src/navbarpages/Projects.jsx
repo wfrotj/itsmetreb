@@ -25,7 +25,7 @@ function Projects() {
               destructuring props to render the different variables.
             </Card.Text>
             <Button className="cards-btn">
-              <a href="https://wfrotj.github.io/BreakingNews/" target="_blank">
+              <a href="https://news-headlines.onrender.com" target="_blank">
                 Visit link
               </a>
             </Button>

@@ -21,7 +21,10 @@ function App() {
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/projects" element={<Projects />} />
-        <Route path="*" element={<h1>Page not found</h1>} />
+        <Route
+          path="*"
+          element={<h1>Page not found. Go back to the Homepage</h1>}
+        />
       </Route>
     )
   );
