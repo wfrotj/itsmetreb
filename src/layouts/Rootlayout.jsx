@@ -1,19 +1,16 @@
-import { NavLink, Outlet } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 function Rootlayout() {
   return (
     <div>
       <header className="">
         <nav>
-          <NavLink to="/">Home</NavLink>
-          <NavLink to="/about">About</NavLink>
-          <NavLink to="/projects"> Projects</NavLink>
-          <NavLink to="/contact">Contact</NavLink>
+          <Link to="/">Home</Link>
+          <Link to="/about">About</Link>
+          <Link to="/projects"> Projects</Link>
+          <Link to="/contact">Contact</Link>
         </nav>
       </header>
-      <main>
-        <Outlet />
-      </main>
     </div>
   );
 }
