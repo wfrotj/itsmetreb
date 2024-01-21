@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import {
   createBrowserRouter,
   createRoutesFromElements,
+  Routes,
   Route,
   RouterProvider,
 } from "react-router-dom";
@@ -14,25 +15,15 @@ import Projects from "./navbarpages/Projects";
 import Rootlayout from "./layouts/Rootlayout";
 
 function App() {
-  const router = createBrowserRouter(
-    createRoutesFromElements(
+  return (
+    <Routes>
       <Route path="/" element={<Rootlayout />}>
         <Route index element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/projects" element={<Projects />} />
-        <Route
-          path="*"
-          element={<h1>Page not found. Go back to the Homepage</h1>}
-        />
       </Route>
-    )
-  );
-
-  return (
-    <React.Fragment>
-      <RouterProvider router={router} />
-    </React.Fragment>
+    </Routes>
   );
 }
 
