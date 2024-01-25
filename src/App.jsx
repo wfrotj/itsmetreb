@@ -16,14 +16,16 @@ import Rootlayout from "./layouts/Rootlayout";
 
 function App() {
   return (
-    <Routes>
-      <Route path="/" element={<Rootlayout />}>
+    <>
+      <Rootlayout />
+      <Routes>
+        <Route path="/" element={<Rootlayout />} />
         <Route index element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/projects" element={<Projects />} />
-      </Route>
-    </Routes>
+      </Routes>
+    </>
   );
 }
 
