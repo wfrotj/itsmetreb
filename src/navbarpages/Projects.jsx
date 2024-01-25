@@ -48,7 +48,7 @@ function Projects() {
               jsonwebtoken for authentication of the user.
             </Card.Text>
             <Button className="cards-btn">
-              <a href="https://hellovms.onrender.com/" target="_blank">
+              <a href="https://hello-vms.vercel.app/" target="_blank">
                 Visit link
               </a>
             </Button>
