@@ -25,10 +25,7 @@ function Projects() {
               destructuring props to render the different variables.
             </Card.Text>
             <Button className="cards-btn">
-              <a
-                href="https://breaking-news-rust.vercel.app/entertainment"
-                target="_blank"
-              >
+              <a href="https://breaking-news-rust.vercel.app" target="_blank">
                 Visit link
               </a>
             </Button>
@@ -68,7 +65,7 @@ function Projects() {
             </Card.Text>
             <Button className="cards-btn">
               <a
-                href="https://phonebook-application-4baq.onrender.com"
+                href="https://phonebook-895rqily4-itsmetrebs-projects.vercel.app/"
                 target="_blank"
               >
                 Visit link
