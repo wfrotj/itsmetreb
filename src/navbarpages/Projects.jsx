@@ -25,7 +25,7 @@ function Projects() {
               destructuring props to render the different variables.
             </Card.Text>
             <Button className="cards-btn">
-              <a href="https://breaking-news-rust.vercel.app" target="_blank">
+              <a href="https://breaking-news-rust.vercel.app/" target="_blank">
                 Visit link
               </a>
             </Button>
