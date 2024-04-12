@@ -11,6 +11,10 @@
     {
       "src": "/contact",
       "dest": "/"
+    },
+    {
+      "src": "/projects",
+      "dest": "/"
     }
   ]
 }
