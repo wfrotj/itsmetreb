@@ -8,8 +8,8 @@ const featured = {
   href: "https://mast-ready.com",
   subtitle: "Management and Scheduling for Tournaments",
   description:
-    "A platform I built to run leagues end to end: rosters, game schedules, QR player profiles, lineups, waivers, and stats. Live at mast-ready.com.",
-  stack: ["React", "Vite", "Tailwind CSS"],
+    "A platform I built to run leagues end to end: rosters, game schedules, QR player profiles, lineups, waivers, and stats. I integrated PayMongo for payments and handled production hosting at mast-ready.com.",
+  stack: ["React", "Vite", "Tailwind CSS", "PayMongo"],
 };
 
 const projects = [
