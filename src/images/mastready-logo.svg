@@ -1,0 +1,25 @@
+<svg width="256" height="256" viewBox="0 0 256 256" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Blue background (square for profile pic) -->
+  <rect width="256" height="256" rx="48" fill="#2563eb"/>
+  <!-- Shield shape -->
+  <path
+    d="M128 16L224 56v72c0 60-40 104-96 120-56-16-96-60-96-120V56l96-40z"
+    fill="white"
+    fill-opacity="0.2"
+  />
+  <path
+    d="M128 16L224 56v72c0 60-40 104-96 120-56-16-96-60-96-120V56l96-40z"
+    stroke="white"
+    stroke-width="8"
+    stroke-linejoin="round"
+    fill="none"
+  />
+  <!-- Checkmark -->
+  <path
+    d="M84 128l32 32 56-64"
+    stroke="white"
+    stroke-width="10"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  />
+</svg>

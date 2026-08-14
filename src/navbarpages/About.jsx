@@ -1,70 +1,191 @@
-import React from "react";
-import Picture from "../images/Picture.jpg";
 import { Link } from "react-router-dom";
+
+const skills = [
+  { label: "JavaScript", className: "text-black bg-customYellow" },
+  { label: "HTML", className: "bg-customOrange text-black" },
+  { label: "CSS", className: "bg-customBlue text-white font-semibold" },
+  { label: "React", className: "bg-customBlack text-customBlue" },
+  { label: "Node.js", className: "bg-customGreen text-black" },
+  { label: "Git", className: "bg-customBlack text-customGreenText" },
+  { label: "Figma", className: "text-black bg-customYellow" },
+  { label: "Mocha", className: "bg-customOrange text-black" },
+  { label: "Chai", className: "bg-customBlue text-white font-semibold" },
+  { label: "Postman", className: "bg-customBlack text-customBlue" },
+  { label: "Claude Code", className: "bg-customGreen text-black" },
+  { label: "n8n", className: "bg-customBlack text-customGreenText" },
+];
+
+const experience = [
+  {
+    role: "Software Engineer",
+    company: "International IT Solutions",
+    period: "June 2025 – Present",
+    points: [
+      "Develop and implement scalable banking solutions by integrating business logic with the bank APIs, while maintaining clean, efficient, and well-structured code.",
+      "Create automated test suites using Node.js, transform Figma designs into responsive HTML/CSS interfaces, and provide accurate technical estimates and work effort assessments for project delivery.",
+    ],
+  },
+  {
+    role: "Software Engineer",
+    company: "Pulsar Software Development",
+    period: "May 2024 – May 2025",
+    points: [
+      "Designed and maintained backend systems that analyze customer financial data to trigger notifications, nudges, and integrations.",
+      "Sustained long-term client partnerships by delivering reliable projects, using task breakdown and AI-assisted analysis to keep implementation plans clear for technical and non-technical stakeholders.",
+    ],
+  },
+  {
+    role: "Digital UX & SEO Marketing Specialist",
+    company: "Upwork (Freelance)",
+    href: "https://www.upwork.com/freelancers/~01512cec647f431fab",
+    period: "October 2023",
+    points: [
+      "Conducted comprehensive audits of client websites to identify SEO, usability, and performance issues, delivering detailed and actionable reports to improve search visibility and user experience.",
+    ],
+  },
+  {
+    role: "Professional Computer Teacher",
+    company: "ANHS",
+    period: "May 2013 – May 2024",
+    points: [
+      "Designed and implemented student-centered technology learning activities while collaborating with colleagues to share instructional strategies, resources, and practical approaches that enhanced technology integration and improved learner confidence and competence.",
+    ],
+  },
+  {
+    role: "Manager",
+    company: "Jollibee Foods Corporation",
+    period: "May 2011 – May 2013",
+    points: [
+      "Led daily operations to maintain consistent performance across sales, service, and production while ensuring compliance with quality and safety standards through strict implementation of SOPs, continuous monitoring, issue identification, and timely corrective actions.",
+    ],
+  },
+];
+
+const education = [
+  {
+    school: "University of Rizal System",
+    credential: "Master in Business Administration (Units Earned)",
+    period: "2015 – 2018",
+  },
+  {
+    school: "Polytechnic University of the Philippines",
+    credential: "Bachelor in Business Technology Education",
+    period: "2007 – 2011",
+  },
+];
+
+const certifications = [
+  "Licensed Professional Teacher",
+  "Full-Stack Web Development",
+  "NC III Bookkeeping – TESDA (2015)",
+];
+
+const awards = [
+  "Best Capstone (2023)",
+  "Overall Top 3 Student (2023)",
+  "Project School Coordinator (DRRM)",
+];
 
 function About() {
   return (
-    <div className="about flex flex-row justify-between items-center gap-4">
-      <div className="mobile: text-l text-justify mt-4 flex flex-col justify-center ">
-        <h2 className="about-me mobile: text-4xl text-center ">About Me</h2>
-        <div className="text-xl laptop:p-10 mobile:p-2">
+    <div className="about flex flex-row items-center justify-between gap-4">
+      <div className="mt-4 flex flex-col justify-center text-lg">
+        <h2 className="about-me text-center text-4xl">About Me</h2>
+        <div className="p-2 text-left text-xl laptop:p-10">
           <p>
-            As a career shifter, my drive to reach higher levels of expertise
-            and excel in the field of software development is constant. I
-            understand that the path may be challenging, but my determination
-            allows me to face any learning curves with a positive mindset and
-            the belief that I can overcome them.
+            Software engineer with 2 years of experience designing and
+            implementing workflow automation and backend systems. I collaborate
+            with cross-functional teams to deliver reliable, production-ready
+            solutions.
           </p>
           <p>
-            My drive pushes me to acquire new skills, broaden my knowledge, and
-            adapt to the demands of my new career. I am proactive in seeking out
-            learning experiences and taking on projects that push me outside of
-            my comfort zone.
-          </p>
-          <p>
-            I am adaptable, resourceful, and responsible in keeping myself
-            up-to-date with the latest industry trends.
+            I care about modern engineering practices, agile development, and
+            building efficient systems that improve user experience and internal
+            workflows.
           </p>
         </div>
-        <div>
-          <div className="mobile:flex justify-center items-center ">
-            <h2 className="mobile:text-2xl text-center ">Techinal Skills</h2>
-          </div>
-          <section className="mobile: flex flex-wrap justify-center items-center gap-4 mt-4">
-            <button className="rounded-full border-white border-solid border-2  w-32 h-10 text-black bg-customYellow ">
-              Javascript
-            </button>
-            <button className="rounded-full border-white border-solid border-2  w-32 h-10 bg-customOrange text-black ">
-              HTML 5
-            </button>
-            <button className="rounded-full border-white border-solid border-2  w-40 h-10 bg-customBlue text-white font-semibold">
-              {" "}
-              Tailwind CSS
-            </button>
-            <button className="rounded-full border-white border-solid border-2  w-32 h-10 bg-customBlack text-customBlue">
-              React JS
-            </button>
-            <button className="rounded-full border-white border-solid border-2  w-24 h-10 bg-customGreen text-black">
-              node js
-            </button>
-            <button className="rounded-full border-white border-solid border-2  w-24 h-10 bg-customBlack text-customGreenText">
-              MongoDB
-            </button>
+
+        <h2 className="mt-2 text-center text-2xl">Experience</h2>
+        <ol className="mt-6 flex flex-col gap-8 text-left laptop:px-10">
+          {experience.map((job) => (
+            <li
+              key={`${job.role}-${job.company}`}
+              className="border-l-2 border-[var(--quarterly)] pl-6"
+            >
+              <h3 className="text-2xl font-bold">{job.role}</h3>
+              <p className="main-span my-1 text-lg">
+                {job.href ? (
+                  <a
+                    href={job.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="contact-link"
+                  >
+                    {job.company}
+                  </a>
+                ) : (
+                  job.company
+                )}
+              </p>
+              <p className="my-0 text-base opacity-80">{job.period}</p>
+              <ul className="mt-3 list-disc space-y-2 pl-5 text-lg">
+                {job.points.map((point) => (
+                  <li key={point}>{point}</li>
+                ))}
+              </ul>
+            </li>
+          ))}
+        </ol>
+
+        <h2 className="mt-10 text-center text-2xl">Education</h2>
+        <ol className="mt-6 flex flex-col gap-6 text-left laptop:px-10">
+          {education.map((item) => (
+            <li
+              key={item.school}
+              className="border-l-2 border-[var(--quarterly)] pl-6"
+            >
+              <h3 className="text-2xl font-bold">{item.credential}</h3>
+              <p className="main-span my-1 text-lg">{item.school}</p>
+              <p className="my-0 text-base opacity-80">{item.period}</p>
+            </li>
+          ))}
+        </ol>
+
+        <div className="mt-10">
+          <h2 className="text-center text-2xl">Technical Skills</h2>
+          <section className="mt-4 flex flex-wrap items-center justify-center gap-4">
+            {skills.map((skill) => (
+              <span
+                key={skill.label}
+                className={`inline-flex h-10 items-center justify-center rounded-full border-2 border-solid border-white px-4 ${skill.className}`}
+              >
+                {skill.label}
+              </span>
+            ))}
           </section>
         </div>
-        <div>
-          <div className="mobile: text-2xl text-center mt-6">
-            <h2>Awards in Bootcamp</h2>
-          </div>
-          <div className="mobile: text-center mt-4 underline ">
-            <h3 className="text-xl">Best in Capstone(Backend Developer)</h3>
-            <h3 className="text-xl">Best in Coding</h3>
-            <h3 className="text-xl">Top 4 Student</h3>
-          </div>
+
+        <h2 className="mt-6 text-center text-2xl">Certifications</h2>
+        <div className="mt-4 text-center">
+          {certifications.map((item) => (
+            <h3 key={item} className="text-xl">
+              {item}
+            </h3>
+          ))}
         </div>
-        <div className="flex justify-center items-center mobile:mt-4">
+
+        <h2 className="mt-6 text-center text-2xl">Awards & Activities</h2>
+        <div className="mt-4 text-center underline">
+          {awards.map((award) => (
+            <h3 key={award} className="text-xl">
+              {award}
+            </h3>
+          ))}
+        </div>
+
+        <div className="mt-4 flex items-center justify-center">
           <Link to="/projects">
-            <button className="color-main mobile:w-60 tablet:w-80 laptop:w-96 text-white font-bold py-2 px-4  mobile:text-xl tablet:text-2xl laptop:text-2xl laptop:mt-8">
+            <button className="color-main w-60 py-2 px-4 text-xl font-bold text-white tablet:w-80 tablet:text-2xl laptop:mt-8 laptop:w-96 laptop:text-2xl">
               Here are my Projects
             </button>
           </Link>

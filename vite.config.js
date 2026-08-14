@@ -8,7 +8,4 @@ export default defineConfig({
   build: {
     outDir: "dist",
   },
-  /*   server: {
-    proxy: "http://localhost:3005",
-  }, */
 });

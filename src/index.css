@@ -59,8 +59,12 @@ header nav a:hover {
   color: var(--primary);
 }
 .cards-btn {
+  display: inline-block;
   background-color: var(--quarterly);
   color: white;
+  text-decoration: none;
+  padding: 8px 16px;
+  border-radius: 4px;
   transition: all 0.3s;
 }
 .cards-btn:hover {
@@ -99,6 +103,71 @@ span {
 .color-main:hover {
   color: var(--quarterly);
   background-color: white;
+}
+.home-btn {
+  display: inline-block;
+  text-decoration: none;
+  padding: 12px 24px;
+  border-radius: 4px;
+  font-weight: 600;
+  transition: all 0.3s;
+}
+.home-btn-primary {
+  background-color: var(--quarterly);
+  color: white;
+}
+.home-btn-primary:hover {
+  background-color: white;
+  color: var(--quarterly);
+}
+.home-btn-secondary {
+  border: 1px solid white;
+  background: transparent;
+  color: white;
+}
+.home-btn-secondary:hover {
+  background-color: white;
+  color: black;
+}
+.contact-link {
+  color: white;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.contact-link:hover {
+  color: var(--quarterly);
+}
+.contact-social {
+  display: inline-flex;
+  color: white;
+  transition: color 0.2s;
+}
+.contact-social:hover {
+  color: var(--quarterly);
+}
+.contact-field {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 4px;
+  background: #111;
+  color: white;
+  font-family: inherit;
+  font-size: 1rem;
+}
+.contact-field:focus {
+  outline: 1px solid var(--quarterly);
+  border-color: var(--quarterly);
+}
+.project-tag {
+  display: inline-block;
+  padding: 4px 10px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 999px;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 500;
 }
 .url:hover {
   color: var(--quarterly);
