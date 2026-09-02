@@ -1,6 +1,17 @@
 services:
+  # Frontend — build + dev (your Render settings)
+  - type: web
+    name: itsmetreb-web
+    runtime: node
+    buildCommand: npm install && npm run build
+    startCommand: npm run dev
+    envVars:
+      - key: NODE_ENV
+        value: development
+
+  # Backend API — contact form, email, captcha, rate limit
   - type: web
     name: itsmetreb-api
     runtime: node
-    buildCommand: npm install
-    startCommand: node server/index.js
+    buildCommand: npm install --omit=dev
+    startCommand: npm run start
