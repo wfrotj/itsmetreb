@@ -1,4 +1,7 @@
 import { Link } from "react-router-dom";
+import upouLogo from "../images/upou-logo.jpg";
+import ursLogo from "../images/urs-logo.jpg";
+import pupLogo from "../images/pup-logo.png";
 
 const skills = [
   { label: "JavaScript", className: "text-black bg-customYellow" },
@@ -61,16 +64,40 @@ const experience = [
   },
 ];
 
+const volunteerExperience = [
+  {
+    role: "Capstone QA & Software Mentor",
+    company: "Volunteer",
+    period: "2026 – Present",
+    points: [
+      "Provide free QA and software development mentoring to students working on capstone projects.",
+      "Guide students on software testing, test planning, requirements, and quality practices.",
+      "Provide technical advice and feedback throughout their project development.",
+    ],
+  },
+];
+
 const education = [
+  {
+    school: "University of the Philippines Open University",
+    credential: "Diploma in Computer Science",
+    period: "2026 – Present",
+    logo: upouLogo,
+    logoAlt: "University of the Philippines Open University seal",
+  },
   {
     school: "University of Rizal System",
     credential: "Master in Business Administration (Units Earned)",
     period: "2015 – 2018",
+    logo: ursLogo,
+    logoAlt: "University of Rizal System seal",
   },
   {
     school: "Polytechnic University of the Philippines",
     credential: "Bachelor in Business Technology Education",
     period: "2007 – 2011",
+    logo: pupLogo,
+    logoAlt: "Polytechnic University of the Philippines seal",
   },
 ];
 
@@ -137,16 +164,53 @@ function About() {
           ))}
         </ol>
 
+        <h2 className="mt-10 text-center text-2xl">Volunteer Experience</h2>
+        <p className="mt-3 text-center text-lg laptop:px-10">
+          This service is completely free for students.{" "}
+          <Link to="/contact" className="contact-link font-semibold">
+            Contact me
+          </Link>{" "}
+          if you need QA or software mentoring for your capstone.
+        </p>
+        <ol className="mt-6 flex flex-col gap-8 text-left laptop:px-10">
+          {volunteerExperience.map((item) => (
+            <li
+              key={`${item.role}-${item.company}`}
+              className="border-l-2 border-[var(--quarterly)] pl-6"
+            >
+              <h3 className="text-2xl font-bold">{item.role}</h3>
+              <p className="main-span my-1 text-lg">{item.company}</p>
+              <p className="my-0 text-base opacity-80">{item.period}</p>
+              <ul className="mt-3 list-disc space-y-2 pl-5 text-lg">
+                {item.points.map((point) => (
+                  <li key={point}>{point}</li>
+                ))}
+              </ul>
+            </li>
+          ))}
+        </ol>
+
         <h2 className="mt-10 text-center text-2xl">Education</h2>
         <ol className="mt-6 flex flex-col gap-6 text-left laptop:px-10">
           {education.map((item) => (
             <li
-              key={item.school}
+              key={`${item.school}-${item.credential}`}
               className="border-l-2 border-[var(--quarterly)] pl-6"
             >
-              <h3 className="text-2xl font-bold">{item.credential}</h3>
-              <p className="main-span my-1 text-lg">{item.school}</p>
-              <p className="my-0 text-base opacity-80">{item.period}</p>
+              <div className="flex items-start gap-4">
+                {item.logo ? (
+                  <img
+                    src={item.logo}
+                    alt={item.logoAlt || item.school}
+                    className="mt-1 h-16 w-16 shrink-0 rounded-full bg-white object-contain p-1"
+                  />
+                ) : null}
+                <div>
+                  <h3 className="text-2xl font-bold">{item.credential}</h3>
+                  <p className="main-span my-1 text-lg">{item.school}</p>
+                  <p className="my-0 text-base opacity-80">{item.period}</p>
+                </div>
+              </div>
             </li>
           ))}
         </ol>

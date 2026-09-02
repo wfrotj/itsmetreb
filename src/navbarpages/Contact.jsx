@@ -1,14 +1,17 @@
-import { useState } from "react";
+import { useCallback, useRef, useState } from "react";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
+import Turnstile from "../components/Turnstile";
 import messageService from "../services/messageService";
+
+const TURNSTILE_SITE_KEY = import.meta.env.VITE_TURNSTILE_SITE_KEY;
 
 const UPWORK_URL = "https://www.upwork.com/freelancers/~01512cec647f431fab";
 
 const details = [
   {
     label: "Email",
-    href: "mailto:trebrodrigo@gmail.com",
-    value: "trebrodrigo@gmail.com",
+    href: "mailto:wilbert.rodrigo.dev@gmail.com",
+    value: "wilbert.rodrigo.dev@gmail.com",
   },
   {
     label: "Upwork",
@@ -28,26 +31,77 @@ const details = [
 ];
 
 function Contact() {
+  const pendingSubmitRef = useRef(false);
   const [message, setMessage] = useState("");
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState("idle");
   const [feedback, setFeedback] = useState("");
 
-  const handleMessage = async (e) => {
-    e.preventDefault();
+  const sendMessage = useCallback(async (captchaToken) => {
     setStatus("sending");
     setFeedback("");
 
     try {
-      await messageService.createMessage({ message, email });
+      const result = await messageService.createMessage({
+        message,
+        email,
+        captchaToken,
+      });
       setMessage("");
       setEmail("");
       setStatus("success");
-      setFeedback("Message sent. Thank you!");
-    } catch {
+      setFeedback(
+        result.autoReplySent
+          ? "Message sent. A confirmation email was sent to your inbox — check spam or promotions if you don't see it."
+          : "Message sent. I'll get back to you soon.",
+      );
+    } catch (err) {
       setStatus("error");
-      setFeedback("Could not send your message. Please try again.");
+      setFeedback(
+        err.response?.data?.error ||
+          "Could not send your message. Please try again.",
+      );
     }
+  }, [message, email]);
+
+  const handleCaptchaVerify = useCallback(
+    (token) => {
+      if (pendingSubmitRef.current) {
+        pendingSubmitRef.current = false;
+        sendMessage(token);
+      }
+    },
+    [sendMessage],
+  );
+
+  const handleCaptchaExpire = useCallback(() => {
+    pendingSubmitRef.current = false;
+    setStatus("idle");
+    setFeedback("Verification expired. Click Send message to try again.");
+  }, []);
+
+  const handleCaptchaError = useCallback(() => {
+    pendingSubmitRef.current = false;
+    setStatus("error");
+    setFeedback("Captcha failed to load. Please refresh and try again.");
+  }, []);
+
+  const handleMessage = (e) => {
+    e.preventDefault();
+
+    if (!TURNSTILE_SITE_KEY) {
+      setStatus("error");
+      setFeedback("Contact form is not configured yet.");
+      return;
+    }
+
+    if (status === "sending" || status === "verifying") {
+      return;
+    }
+
+    setFeedback("");
+    pendingSubmitRef.current = true;
+    setStatus("verifying");
   };
 
   return (
@@ -61,6 +115,22 @@ function Contact() {
           Open to software engineering work, collaboration, and conversations
           about backend systems and workflow automation.
         </p>
+        <div className="mt-6 border border-white/25 p-4 text-left">
+          <p className="my-0 text-lg leading-relaxed">
+            <span className="main-span font-semibold">Free for students.</span>{" "}
+            I volunteer capstone QA and software development mentoring at no
+            cost — help with testing, requirements, quality practices, and
+            technical feedback throughout your project.{" "}
+            <a href="#contact-form" className="contact-link font-semibold">
+              Contact me here
+            </a>{" "}
+            or email{" "}
+            <a href="mailto:wilbert.rodrigo.dev@gmail.com" className="contact-link">
+              wilbert.rodrigo.dev@gmail.com
+            </a>
+            .
+          </p>
+        </div>
 
         <dl className="mt-8 flex w-full flex-col gap-5 text-left">
           {details.map((item) => (
@@ -127,6 +197,7 @@ function Contact() {
       </div>
 
       <form
+        id="contact-form"
         onSubmit={handleMessage}
         className="flex w-full max-w-md flex-col gap-5"
       >
@@ -159,12 +230,39 @@ function Contact() {
             onChange={(e) => setMessage(e.target.value)}
           />
         </div>
+        {status === "verifying" ? (
+          <>
+            <p className="my-0 text-sm opacity-80">
+              Complete the Cloudflare check below to send your message.
+            </p>
+            {TURNSTILE_SITE_KEY ? (
+              <Turnstile
+                siteKey={TURNSTILE_SITE_KEY}
+                onVerify={handleCaptchaVerify}
+                onExpire={handleCaptchaExpire}
+                onError={handleCaptchaError}
+              />
+            ) : null}
+          </>
+        ) : null}
+        {!TURNSTILE_SITE_KEY ? (
+          <p className="my-0 text-sm text-red-400">
+            Captcha is not configured. Add VITE_TURNSTILE_SITE_KEY to your
+            environment.
+          </p>
+        ) : null}
         <button
           className="home-btn home-btn-primary mt-2 self-start disabled:cursor-not-allowed disabled:opacity-60"
           type="submit"
-          disabled={status === "sending"}
+          disabled={
+            status === "sending" || status === "verifying" || !TURNSTILE_SITE_KEY
+          }
         >
-          {status === "sending" ? "Sending..." : "Send message"}
+          {status === "sending"
+            ? "Sending..."
+            : status === "verifying"
+              ? "Verifying..."
+              : "Send message"}
         </button>
         {feedback ? (
           <p

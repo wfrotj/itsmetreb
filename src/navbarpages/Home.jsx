@@ -23,6 +23,13 @@ function Home() {
         <p className="mt-2 text-sm opacity-70">
           International IT Solutions · Antipolo, Philippines
         </p>
+        <p className="mt-4 text-base leading-relaxed">
+          I also offer{" "}
+          <Link to="/contact" className="contact-link font-semibold">
+            free capstone QA and software mentoring
+          </Link>{" "}
+          for students working on their projects.
+        </p>
         <div className="mt-8 flex flex-wrap items-center justify-center gap-4 laptop:justify-start">
           <Link to="/projects" className="home-btn home-btn-primary">
             View projects
