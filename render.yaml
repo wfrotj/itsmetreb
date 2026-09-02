@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: itsmetreb
+    name: itsmetreb-api
     runtime: node
-    buildCommand: npm install && npm run build
-    startCommand: npm start
+    buildCommand: npm install
+    startCommand: node server/index.js
