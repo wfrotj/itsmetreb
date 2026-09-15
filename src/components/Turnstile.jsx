@@ -1,43 +1,37 @@
-import { forwardRef, useEffect, useImperativeHandle, useRef } from "react";
+import { useEffect, useRef } from "react";
 
-const Turnstile = forwardRef(function Turnstile(
-  { siteKey, onVerify, onExpire, onError, onReady },
-  ref,
-) {
+function Turnstile({ siteKey, onVerify, onExpire, onError }) {
   const containerRef = useRef(null);
   const widgetIdRef = useRef(null);
+  const callbacksRef = useRef({ onVerify, onExpire, onError });
 
-  useImperativeHandle(ref, () => ({
-    reset() {
-      if (widgetIdRef.current !== null && window.turnstile) {
-        window.turnstile.reset(widgetIdRef.current);
-      }
-    },
-  }));
+  callbacksRef.current = { onVerify, onExpire, onError };
 
   useEffect(() => {
     if (!siteKey || !containerRef.current) {
       return undefined;
     }
 
+    let cancelled = false;
+
     const renderWidget = () => {
-      if (!window.turnstile || !containerRef.current) {
+      if (cancelled || !window.turnstile || !containerRef.current) {
         return;
+      }
+
+      if (widgetIdRef.current !== null) {
+        window.turnstile.remove(widgetIdRef.current);
+        widgetIdRef.current = null;
       }
 
       widgetIdRef.current = window.turnstile.render(containerRef.current, {
         sitekey: siteKey,
         size: "normal",
         theme: "auto",
-        callback: onVerify,
-        "expired-callback": onExpire,
-        "error-callback": onError,
-      });
-
-      onReady?.();
-      containerRef.current.scrollIntoView({
-        behavior: "smooth",
-        block: "center",
+        retry: "auto",
+        callback: (token) => callbacksRef.current.onVerify?.(token),
+        "expired-callback": () => callbacksRef.current.onExpire?.(),
+        "error-callback": (code) => callbacksRef.current.onError?.(code),
       });
     };
 
@@ -49,11 +43,7 @@ const Turnstile = forwardRef(function Turnstile(
       );
 
       if (existingScript) {
-        if (window.turnstile) {
-          renderWidget();
-        } else {
-          existingScript.addEventListener("load", renderWidget, { once: true });
-        }
+        existingScript.addEventListener("load", renderWidget, { once: true });
       } else {
         const script = document.createElement("script");
         script.src =
@@ -64,16 +54,17 @@ const Turnstile = forwardRef(function Turnstile(
     }
 
     return () => {
+      cancelled = true;
       if (widgetIdRef.current !== null && window.turnstile) {
         window.turnstile.remove(widgetIdRef.current);
         widgetIdRef.current = null;
       }
     };
-  }, [siteKey, onVerify, onExpire, onError, onReady]);
+  }, [siteKey]);
 
   return (
     <div ref={containerRef} className="min-h-[65px] w-full py-2" aria-live="polite" />
   );
-});
+}
 
 export default Turnstile;

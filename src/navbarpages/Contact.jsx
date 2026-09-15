@@ -1,4 +1,4 @@
-import { useCallback, useRef, useState } from "react";
+import { useCallback, useState } from "react";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 import Turnstile from "../components/Turnstile";
 import messageService from "../services/messageService";
@@ -30,14 +30,57 @@ const details = [
   },
 ];
 
+function turnstileErrorMessage(code) {
+  const value = String(code || "");
+
+  if (value.startsWith("110200")) {
+    return "Captcha domain not allowed. Add this site's hostname in Cloudflare Turnstile.";
+  }
+
+  if (value.startsWith("300") || value.startsWith("600")) {
+    return "Captcha challenge failed. Close DevTools, disable ad blockers, then try again.";
+  }
+
+  return `Captcha failed${value ? ` (${value})` : ""}. Refresh and try again.`;
+}
+
 function Contact() {
-  const pendingSubmitRef = useRef(false);
   const [message, setMessage] = useState("");
   const [email, setEmail] = useState("");
+  const [captchaToken, setCaptchaToken] = useState("");
   const [status, setStatus] = useState("idle");
   const [feedback, setFeedback] = useState("");
 
-  const sendMessage = useCallback(async (captchaToken) => {
+  const handleCaptchaVerify = useCallback((token) => {
+    setCaptchaToken(token);
+    setFeedback("");
+  }, []);
+
+  const handleCaptchaExpire = useCallback(() => {
+    setCaptchaToken("");
+  }, []);
+
+  const handleCaptchaError = useCallback((code) => {
+    setCaptchaToken("");
+    setStatus("error");
+    setFeedback(turnstileErrorMessage(code));
+  }, []);
+
+  const handleMessage = async (e) => {
+    e.preventDefault();
+
+    if (!TURNSTILE_SITE_KEY) {
+      setStatus("error");
+      setFeedback("Contact form is not configured yet.");
+      return;
+    }
+
+    if (!captchaToken) {
+      setStatus("error");
+      setFeedback("Please complete the captcha before sending.");
+      return;
+    }
+
     setStatus("sending");
     setFeedback("");
 
@@ -49,6 +92,7 @@ function Contact() {
       });
       setMessage("");
       setEmail("");
+      setCaptchaToken("");
       setStatus("success");
       setFeedback(
         result.autoReplySent
@@ -56,52 +100,13 @@ function Contact() {
           : "Message sent. I'll get back to you soon.",
       );
     } catch (err) {
+      setCaptchaToken("");
       setStatus("error");
       setFeedback(
         err.response?.data?.error ||
           "Could not send your message. Please try again.",
       );
     }
-  }, [message, email]);
-
-  const handleCaptchaVerify = useCallback(
-    (token) => {
-      if (pendingSubmitRef.current) {
-        pendingSubmitRef.current = false;
-        sendMessage(token);
-      }
-    },
-    [sendMessage],
-  );
-
-  const handleCaptchaExpire = useCallback(() => {
-    pendingSubmitRef.current = false;
-    setStatus("idle");
-    setFeedback("Verification expired. Click Send message to try again.");
-  }, []);
-
-  const handleCaptchaError = useCallback(() => {
-    pendingSubmitRef.current = false;
-    setStatus("error");
-    setFeedback("Captcha failed to load. Please refresh and try again.");
-  }, []);
-
-  const handleMessage = (e) => {
-    e.preventDefault();
-
-    if (!TURNSTILE_SITE_KEY) {
-      setStatus("error");
-      setFeedback("Contact form is not configured yet.");
-      return;
-    }
-
-    if (status === "sending" || status === "verifying") {
-      return;
-    }
-
-    setFeedback("");
-    pendingSubmitRef.current = true;
-    setStatus("verifying");
   };
 
   return (
@@ -230,39 +235,25 @@ function Contact() {
             onChange={(e) => setMessage(e.target.value)}
           />
         </div>
-        {status === "verifying" ? (
-          <>
-            <p className="my-0 text-sm opacity-80">
-              Complete the Cloudflare check below to send your message.
-            </p>
-            {TURNSTILE_SITE_KEY ? (
-              <Turnstile
-                siteKey={TURNSTILE_SITE_KEY}
-                onVerify={handleCaptchaVerify}
-                onExpire={handleCaptchaExpire}
-                onError={handleCaptchaError}
-              />
-            ) : null}
-          </>
-        ) : null}
-        {!TURNSTILE_SITE_KEY ? (
+        {TURNSTILE_SITE_KEY ? (
+          <Turnstile
+            siteKey={TURNSTILE_SITE_KEY}
+            onVerify={handleCaptchaVerify}
+            onExpire={handleCaptchaExpire}
+            onError={handleCaptchaError}
+          />
+        ) : (
           <p className="my-0 text-sm text-red-400">
             Captcha is not configured. Add VITE_TURNSTILE_SITE_KEY to your
             environment.
           </p>
-        ) : null}
+        )}
         <button
           className="home-btn home-btn-primary mt-2 self-start disabled:cursor-not-allowed disabled:opacity-60"
           type="submit"
-          disabled={
-            status === "sending" || status === "verifying" || !TURNSTILE_SITE_KEY
-          }
+          disabled={status === "sending" || !TURNSTILE_SITE_KEY || !captchaToken}
         >
-          {status === "sending"
-            ? "Sending..."
-            : status === "verifying"
-              ? "Verifying..."
-              : "Send message"}
+          {status === "sending" ? "Sending..." : "Send message"}
         </button>
         {feedback ? (
           <p

@@ -8,8 +8,8 @@
     "node": "20.x"
   },
   "scripts": {
-    "dev": "vite --host 0.0.0.0",
-    "dev:local-api": "vite --config vite.dev.config.js --host 0.0.0.0",
+    "dev": "vite --config vite.dev.config.js --host 0.0.0.0",
+    "dev:web-only": "vite --host 0.0.0.0",
     "build": "vite build",
     "start": "node server/index.js",
     "start:web": "vite preview --host 0.0.0.0",
