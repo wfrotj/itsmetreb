@@ -1,17 +1,7 @@
 services:
-  # Frontend — build + dev (your Render settings)
+  # One Render service: build frontend, then serve site + contact API
   - type: web
-    name: itsmetreb-web
+    name: itsmetreb
     runtime: node
     buildCommand: npm install && npm run build
-    startCommand: npm run dev
-    envVars:
-      - key: NODE_ENV
-        value: development
-
-  # Backend API — contact form, email, captcha, rate limit
-  - type: web
-    name: itsmetreb-api
-    runtime: node
-    buildCommand: npm install --omit=dev
-    startCommand: npm run start
+    startCommand: npm start
